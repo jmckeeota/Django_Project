@@ -1,0 +1,11 @@
+FROM python:alpine3.15
+ENV PYTHONBUFFERD=1
+ENV PYTHONWRITEBYTECODE=1
+WORKDIR /app
+RUN apk update
+RUN apk add --update py3-pip
+RUN pip install pipenv
+COPY . .
+RUN pipenv install --system
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

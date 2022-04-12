@@ -1,0 +1,29 @@
+version: '3'
+services:
+  website:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - 8000:8000
+  db:
+    image: mysql
+    # volumes:
+    #   - ./database/db:/var/lib/mysql
+    #   - ./database/config_files:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: Temporary_Password
+      user: "1000:50"
+
+  # database_check:
+  #   build: ./database_check
+  #   entrypoint: ["/bin/bash"]
+  #   command: ["wait-for-it.sh"]
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 5001:80
+    environment:
+      - PMA_ARBITRARY=1
