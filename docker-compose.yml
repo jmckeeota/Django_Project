@@ -6,6 +6,13 @@ services:
       - ./backend:/app
     ports:
       - 8000:8000
+    environment:
+      - DATABASE_NAME=robots
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=Temporary_Password
+    depends_on:
+      - "db"
+    command: wait-for.sh db:3306 && python manage.py runserver 0.0.0.0:8000
   db:
     image: mysql
     # volumes:
