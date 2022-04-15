@@ -1,1 +1,1 @@
-./backend/wait-for eol=lf
+.*/* eol=lf
