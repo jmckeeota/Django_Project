@@ -7,21 +7,20 @@ class Module(models.Model):
     slots = models.IntegerField()
     description = models.TextField()
 
-class Firmware(models.Model):
-    version = models.CharField(max_length=255)
-
 class Model_Number(models.Model):
     model_number = models.CharField(max_length=255)
-    firmware = models.ForeignKey(
-        Firmware, on_delete=models.PROTECT
+
+
+class Firmware(models.Model):
+    version = models.CharField(max_length=255)
+    model = models.ForeignKey(
+        Model_Number, on_delete=models.PROTECT
     )
+
 
 class Owner(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    owner_robot = models.ForeignKey(
-        "Robot", on_delete=models.PROTECT, related_name='+'
-    )
 
 class Robot(models.Model):
     STATUS_ONLINE = 'N'
@@ -49,7 +48,6 @@ class Robot(models.Model):
     owner = models.ForeignKey(
         Owner, on_delete=models.PROTECT, blank=True, null=True,
     )
-
 
 class Address(models.Model):
     street = models.CharField(max_length=255)
