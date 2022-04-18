@@ -4,6 +4,7 @@ services:
     build: ./backend
     volumes:
       - ./backend:/app
+      - /dev/null:/backend/robots/migrations/*.py
     ports:
       - 8000:8000
     environment:
@@ -12,7 +13,7 @@ services:
       - DATABASE_PASSWORD=Temporary_Password
     depends_on:
       - "db"
-    command: sh -c "./wait-for.sh db:3306 && mysql -h db -u root -pTemporary_Password -e \"CREATE DATABASE IF NOT EXISTS robots\" && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "./wait-for.sh db:3306 && mysql -h db -u root -pTemporary_Password -e \"CREATE DATABASE IF NOT EXISTS robots\" && python manage.py makemigrations && python manage.py migrate && mysql -h db -u root -pTemporary_Password robots < mock-data.sql && python manage.py runserver 0.0.0.0:8000"
     # command: sh -c "./wait-for db:3306 && python manage.py runserver 0.0.0.0:8000"
 
   db:
