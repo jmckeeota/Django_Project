@@ -11,9 +11,12 @@ services:
       - DATABASE_NAME=robots
       - DATABASE_USER=root
       - DATABASE_PASSWORD=Temporary_Password
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=Temporary_Password
+      - DJANGO_SUPERUSER_EMAIL=jasonmckeeotatrash@gmail.com
     depends_on:
       - "db"
-    command: sh -c "./wait-for.sh db:3306 && mysql -h db -u root -pTemporary_Password -e \"CREATE DATABASE IF NOT EXISTS robots\" && python manage.py makemigrations && python manage.py migrate && mysql -h db -u root -pTemporary_Password robots < mock-data.sql && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "./wait-for.sh db:3306 && mysql -h db -u root -pTemporary_Password -e \"CREATE DATABASE IF NOT EXISTS robots\" && python manage.py makemigrations && python manage.py migrate && mysql -h db -u root -pTemporary_Password robots < mock-data.sql && python manage.py createsuperuser --noinput && python manage.py runserver 0.0.0.0:8000"
     # command: sh -c "./wait-for db:3306 && python manage.py runserver 0.0.0.0:8000"
 
   db:

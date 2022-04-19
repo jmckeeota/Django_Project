@@ -3,3 +3,8 @@
 {% else %}
 <h1>Hello World</h1>
 {% endif %}
+<ul>
+    {% for result in results %}
+    <li>{{ result.first_name }} {{ result.last_name }} has {{ result.robot_count }} robots</li>
+    {% endfor %}
+</ul>

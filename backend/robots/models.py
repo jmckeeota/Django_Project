@@ -10,17 +10,24 @@ class Module(models.Model):
 class Model_Number(models.Model):
     model_number = models.CharField(max_length=255)
 
+    def __str__(self) -> str:
+        return self.model_number
+
 
 class Firmware(models.Model):
     version = models.CharField(max_length=255)
     model = models.ForeignKey(
         Model_Number, on_delete=models.PROTECT
     )
-
+    def __str__(self) -> str:
+        return self.version
 
 class Owner(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'
 
 class Robot(models.Model):
     STATUS_ONLINE = 'N'
