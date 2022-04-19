@@ -16,7 +16,10 @@ services:
       - DJANGO_SUPERUSER_EMAIL=jasonmckeeotatrash@gmail.com
     depends_on:
       - "db"
-    command: sh -c "./wait-for.sh db:3306 && mysql -h db -u root -pTemporary_Password -e \"CREATE DATABASE IF NOT EXISTS robots\" && python manage.py makemigrations && python manage.py migrate && mysql -h db -u root -pTemporary_Password robots < mock-data.sql && python manage.py createsuperuser --noinput && python manage.py runserver 0.0.0.0:8000"
+      # sed -e "s/^insert into/insert ignore into/gI" < mock-data.sql
+      #Find out a way to make it case insensitive
+    command: sh -c "./wait-for.sh db:3306 && mysql -h db -u root -pTemporary_Password -e \"CREATE DATABASE IF NOT EXISTS robots\" && python manage.py makemigrations && python manage.py migrate && sed -e 's/insert into/insert ignore into/gI' < mock-data.sql | mysql -h db -u root -pTemporary_Password robots && python manage.py createsuperuser --noinput && python manage.py runserver 0.0.0.0:8000"
+    # command: sh -c "./wait-for.sh db:3306 && mysql -h db -u root -pTemporary_Password -e \"CREATE DATABASE IF NOT EXISTS robots\" && python manage.py makemigrations && python manage.py migrate && mysql -h db -u root -pTemporary_Password robots < mock-data.sql && python manage.py createsuperuser --noinput && python manage.py runserver 0.0.0.0:8000"
     # command: sh -c "./wait-for db:3306 && python manage.py runserver 0.0.0.0:8000"
 
   db:
