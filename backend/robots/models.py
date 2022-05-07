@@ -7,6 +7,9 @@ class Module(models.Model):
     slots = models.IntegerField()
     description = models.TextField()
 
+    def __str__(self) -> str:
+        return self.skill
+
 class Model_Number(models.Model):
     model_number = models.CharField(max_length=255)
 
@@ -45,7 +48,6 @@ class Robot(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     built = models.DateTimeField()
     updated = models.DateTimeField(auto_now=True)
-    modules = models.ManyToManyField(Module)
     firmware = models.ForeignKey(
         Firmware, on_delete=models.PROTECT
     )
@@ -63,3 +65,10 @@ class Address(models.Model):
         Owner, on_delete=models.CASCADE
     )
 
+class ModuleItem(models.Model):
+    module = models.ForeignKey(Module, on_delete=models.PROTECT)
+    robot = models.ForeignKey(Robot, on_delete=models.PROTECT)
+    quantity = models.PositiveSmallIntegerField()
+
+    # def __str__(self) -> str:
+    #     return self.module.skill
