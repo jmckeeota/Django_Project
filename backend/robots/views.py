@@ -17,7 +17,7 @@ def say_hello(request):
 
 @api_view()
 def robots_list(request):
-    queryset = Robot.objects.select_related('firmware').all()
+    queryset = Robot.objects.select_related('firmware').select_related('modelitem').all()
     serializer = RobotSerializer(queryset, many=True)
     return Response(serializer.data)
 
