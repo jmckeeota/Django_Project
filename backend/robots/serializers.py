@@ -1,4 +1,4 @@
-from robots.models import Robot, Module, ModuleItem
+from robots.models import Robot, Module, ModuleItem, Comment
 from rest_framework import serializers
 
 class RobotModuleSerializer(serializers.ModelSerializer):
@@ -24,3 +24,8 @@ class ModuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Module
         fields = ['id', 'skill', 'description']
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'date', 'name', 'description', 'robot']

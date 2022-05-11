@@ -72,3 +72,9 @@ class ModuleItem(models.Model):
 
     # def __str__(self) -> str:
     #     return self.module.skill
+
+class Comment(models.Model):
+    robot = models.ForeignKey(Robot, on_delete=models.CASCADE, related_name='reviews')
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    date = models.DateField(auto_now_add=True)

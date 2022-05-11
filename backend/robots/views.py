@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
-from robots.models import Module, Robot, Owner, ModuleItem
-from .serializers import RobotSerializer, ModuleSerializer
+from robots.models import Module, Robot, Owner, ModuleItem, Comment
+from .serializers import CommentSerializer, RobotSerializer, ModuleSerializer
 
 class RobotViewSet(ModelViewSet):
     queryset = Robot.objects.prefetch_related('moduleitem_set__module').select_related('firmware').all()
@@ -35,6 +35,10 @@ class ModuleViewSet(ModelViewSet):
             return Response({'error': 'Module cannot be deleted because it has associated moduleitems'})
 
         return super().destroy(request, *args, **kwargs)
+
+class CommentViewSet(ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
 # Create your views here.
 def say_hello(request):
