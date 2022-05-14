@@ -28,4 +28,8 @@ class ModuleSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['id', 'date', 'name', 'description', 'robot']
+        fields = ['id', 'date', 'name', 'description']
+
+    def create(self, validated_data):
+        robot_id = self.context['robot_id']
+        return Comment.objects.create(robot_id=robot_id, **validated_data)
