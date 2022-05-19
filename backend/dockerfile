@@ -8,6 +8,9 @@ RUN apk add mariadb-dev
 RUN apk add build-base
 RUN apk add mariadb-client
 
+#The following is needed for djoser
+RUN apk add libffi-dev
+
 #Install pip and requirements
 RUN apk add --update py3-pip
 RUN pip install pipenv
