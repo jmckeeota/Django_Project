@@ -12,6 +12,7 @@ Django
 3. [Djoser](https://djoser.readthedocs.io/en/latest/index.html) and json-based token implementation via [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
 4. Distinct and clear separation of functions.  User authentication, likes, comments, and website resources are intentionally detatched for a modular development approach
 5. Cutomized Django Admin console
+6. Demonstration of care being taken to limit database calls
 
 Instructions
 1. Ensure Docker is running
