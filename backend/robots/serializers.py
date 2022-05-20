@@ -1,4 +1,4 @@
-from robots.models import Robot, Module, ModuleItem, Comment
+from robots.models import Robot, Module, ModuleItem, Comment, Owner
 from rest_framework import serializers
 
 class RobotModuleSerializer(serializers.ModelSerializer):
@@ -33,3 +33,9 @@ class CommentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         robot_id = self.context['robot_id']
         return Comment.objects.create(robot_id=robot_id, **validated_data)
+
+class OwnerSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+    class Meta:
+        model = Owner
+        fields = ['id', 'user_id', 'email', 'phone', 'birth_date']

@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib import admin
 from django.conf import settings
 from django.db import models
@@ -43,6 +44,10 @@ class Owner(models.Model):
 
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
+
+    birth_date = models.DateField(null=True, blank=True)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(null=True, blank=True, max_length=255)
 
 class Robot(models.Model):
     STATUS_ONLINE = 'N'

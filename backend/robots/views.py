@@ -3,13 +3,14 @@ from django.db.models import Count
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from .pagination import DefaultPagination
 from .filters import RobotFilter
 from .models import Module, Robot, Owner, ModuleItem, Comment
-from .serializers import CommentSerializer, RobotSerializer, ModuleSerializer
+from .serializers import CommentSerializer, OwnerSerializer, RobotSerializer, ModuleSerializer
 
 class RobotViewSet(ModelViewSet):
     queryset = Robot.objects.prefetch_related('moduleitem_set__module').select_related('firmware').all()
@@ -57,3 +58,7 @@ def say_hello(request):
     )
 
     return render(request, 'hello.html', {'name': 'Jason', 'results': list(query_set)})
+
+class OwnerViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
+    queryset = Owner.objects.all()
+    serializer_class = OwnerSerializer

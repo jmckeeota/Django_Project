@@ -6,6 +6,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register('robots', views.RobotViewSet, basename='robots')
 router.register('modules', views.ModuleViewSet)
+router.register('owners', views.OwnerViewSet)
 
 robots_router = routers.NestedDefaultRouter(router, 'robots', lookup='robot')
 robots_router.register('comments', views.CommentViewSet, basename='robot-comments')
