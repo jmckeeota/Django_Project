@@ -14,13 +14,13 @@ Django
 5. Cutomized Django Admin console
 
 Instructions
-* Ensure Docker is running
-* From repository root, run "docker-compose up --build" and wait for build
-* Hit the APIs from localhost:8000/robots/
-* Hit the database administrator console at localhost:5001
-    -Database = "db"
-    -Username = "root"
-    -Password = "Temporary_Password"
-* Hit the Django admin console here: localhost:8000/admin
-    -Username = "admin"
-    -Password = "Temporary_Password"
+1. Ensure Docker is running
+2. From repository root, run "docker-compose up --build" and wait for build
+3. Visit the APIs from localhost:8000/robots/
+4. Visit the database administrator console at localhost:5001
+    * Database = "db"
+    * Username = "root"
+    * Password = "Temporary_Password"
+5. Visit the Django admin console here: localhost:8000/admin
+    * Username = "admin"
+    * Password = "Temporary_Password"
