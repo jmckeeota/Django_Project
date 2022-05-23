@@ -10,7 +10,7 @@ This project is a in-progress custom adaptation of the Django course [here](http
 1. Custom Django models demonstrating robust understanding of database relationship types and method overwriting
 2. API endpoints for website resources via Django Rest Framework
 3. [Djoser](https://djoser.readthedocs.io/en/latest/index.html) and json-based token implementation via [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
-4. Distinct and clear separation of functions.  User authentication, likes, comments, and website resources are intentionally detatched for a modular development approach
+4. Distinct and clear separation of functions.  User authentication, likes, and website resources are intentionally detatched for a modular development approach
 5. Cutomized Django Admin console
 6. Demonstration of care being taken to limit database calls
 
