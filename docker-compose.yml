@@ -32,3 +32,5 @@ services:
       - 5001:80
     environment:
       - PMA_ARBITRARY=1
+    depends_on:
+      - "db"

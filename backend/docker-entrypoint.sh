@@ -1,4 +1,18 @@
 #!/bin/sh
+apk update
+
+#The following is needed for mysqlclient
+apk add mariadb-dev
+apk add build-base
+apk add mariadb-client
+
+#The following is needed for djoser
+apk add libffi-dev
+
+#Install pip and requirements
+apk add --update py3-pip
+pip install pipenv
+pipenv install --system
 
 #Wait for DB to activate
 ./wait-for.sh db:3306
