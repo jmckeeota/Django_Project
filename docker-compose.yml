@@ -14,7 +14,9 @@ services:
       - DJANGO_SUPERUSER_USERNAME=admin
       - DJANGO_SUPERUSER_PASSWORD=Temporary_Password
       - DJANGO_SUPERUSER_EMAIL=jasonmckeeotatrash@gmail.com
-      - DATABASE_DATA=mock-data.sql
+      - DATABASE_DATA=./mock-data/mock-data.sql
+      - USER_CREATION_SCRIPT=./mock-data/mock-users.py
+      - USER_CREATION_JSON=./mock-data/mock-users.json
     depends_on:
       - "db"
     command: ./docker-entrypoint.sh

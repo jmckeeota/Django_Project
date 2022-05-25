@@ -26,11 +26,8 @@ python manage.py makemigrations && python manage.py migrate
 #Create the superuser.  Flag and continue if unable
 python manage.py createsuperuser --noinput || echo 'cannot create admin user'
 
-#Create the reuglar users.
-python manage.py shell < mock-users.py
-
-#Change the sql document to handle already created database entries if it can't.  Import the mock data.
-sed -e 's/insert into/insert ignore into/gI' < ${DATABASE_DATA} | mysql -h db -u root -p${DATABASE_PASSWORD} robots
+#Create the reuglar users and Owners.  Change the sql document to handle already created database entries if it can't.  Import the mock data.
+python manage.py shell < ${USER_CREATION_SCRIPT} && sed -e 's/insert into/insert ignore into/gI' < ${DATABASE_DATA} | mysql -h db -u root -p${DATABASE_PASSWORD} robots
 
 #Start the server
 python manage.py runserver 0.0.0.0:8000

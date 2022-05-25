@@ -1,9 +1,10 @@
 from core.models import User
 import json
+import os
 
- 
+
 # Opening JSON file
-f = open('mock-users.json')
+f = open(os.environ.get('USER_CREATION_JSON'))
   
 # load json file
 jsonFile = json.load(f)
