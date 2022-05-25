@@ -29,7 +29,7 @@ class Firmware(models.Model):
         return self.version
 
 class Owner(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
     def __str__(self) -> str:
         return f'{self.user.first_name} {self.user.last_name}'
@@ -44,9 +44,8 @@ class Owner(models.Model):
 
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
-
+    
     birth_date = models.DateField(null=True, blank=True)
-    email = models.EmailField(unique=True)
     phone = models.CharField(null=True, blank=True, max_length=255)
 
 class Robot(models.Model):
