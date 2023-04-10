@@ -32,7 +32,7 @@ class Owner(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
     def __str__(self) -> str:
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f'{self.user.username}'
 
     @admin.display(ordering='user__first_name')
     def first_name(self):

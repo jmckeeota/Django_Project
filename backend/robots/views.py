@@ -13,7 +13,7 @@ from .models import Module, Robot, Owner, ModuleItem, Comment
 from .serializers import CommentSerializer, OwnerSerializer, RobotSerializer, ModuleSerializer
 
 class RobotViewSet(ModelViewSet):
-    queryset = Robot.objects.prefetch_related('moduleitem_set__module').select_related('firmware').all()
+    queryset = Robot.objects.prefetch_related('moduleitem_set__module').select_related('firmware', 'owner').all()
     serializer_class = RobotSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = RobotFilter
