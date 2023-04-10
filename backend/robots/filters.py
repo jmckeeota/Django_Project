@@ -5,5 +5,6 @@ class RobotFilter(FilterSet):
     class Meta:
         model = Robot
         fields = {
-            'moduleitem__module_id': ['exact']
+            'moduleitem__module_id': ['exact'],
+            'firmware': ['gt', 'lt']
         }

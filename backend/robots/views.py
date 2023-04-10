@@ -1,11 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Count
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
-from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from .pagination import DefaultPagination
 from .filters import RobotFilter
